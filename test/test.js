@@ -76,8 +76,20 @@ describe("ColouredProse", function() {
     it("should convert a syllable to a certain colour.", function(){
       var colouredProse = new ColouredProse('a,e,y,u,i,o'.split(','));
       var color = colouredProse.colorize("yd");
-      console.log(color);
       assert.equal(color, "hsl(120,50%,50%)", "does not produce the right colour.");
+    });
+  });
+
+  describe(".processText()", function() {
+    it("should yield a colouredText correlating to the syllabised text", function(){
+      var colouredProse = new ColouredProse('a,e,y,u,i,o'.split(','));
+      var aHaiku = "An old silent pond...\nA frog jumps into the pond,\nsplash! Silence again.";
+      //source: //examples.yourdictionary.com/examples-of-haiku-poems.html"
+      colouredProse.processText(aHaiku);
+
+      colouredProse.syllabelisedText.forEach(function (sentence, senI){
+        assert.equal(colouredProse.syllabelisedText[senI].length, colouredProse.colourisedText[senI].length);
+      });
     });
   });
 });

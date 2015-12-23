@@ -51,11 +51,14 @@ ColouredProse.prototype.colorize = function (syllable) {
       hue = this.vowelsToHue[vowel];
     }
   }
+
   if(numOfVowels > 1) {
-    console.warn('syllable', syllable, ' has more than one vowel. The code assumes that this does not happen.');
+    grayscale = 95;
+  }
+  else {
+    grayscale = Math.round(numOfVowels/syllable.length * 100);
   }
 
-  grayscale = Math.round(numOfVowels/syllable.length * 100);
   return 'hsl('+ hue +','+ grayscale +'%,50%)';
 }
 
@@ -82,6 +85,23 @@ ColouredProse.prototype.createVowelRegExps = function () {
      map[vowel] = new RegExp(vowel,'gi');
   });
   return map;
+};
+/**
+ * Processes a piece of text in to a array of nested syllables
+ * and a array of nested colour values that mirrors those syllables.
+ * Both can be accessed via .syllabelisedText and .colourisedText.
+ * Code is executed synchronously!
+ * @param  {String} pieceOfProse The text to process.
+ * @param  {String} eolCharacters Optional EOL characters, optional, defaults to "\n"
+ * @return {void}
+ */
+ColouredProse.prototype.processText = function (pieceOfProse, eolCharacters) {
+  this.syllabelisedText = this.chopUpString(pieceOfProse, eolCharacters);
+  this.colourisedText = this.syllabelisedText.map(function (line) {
+    return line.map(function (syllable) {
+      return this.colorize(syllable);
+    }, this);
+  }, this);
 };
 
 module.exports = ColouredProse;
