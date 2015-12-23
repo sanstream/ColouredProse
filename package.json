@@ -1,0 +1,28 @@
+{
+  "name": "coloured-prose",
+  "version": "1.0.0",
+  "description": "A module for converting prose to colour patterns.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test/test.js"
+  },
+  "keywords": [
+    "prose",
+    "text",
+    "pattern",
+    "colour",
+    "color",
+    "poems"
+  ],
+  "author": "Sanne Peters",
+  "license": "ISC",
+  "dependencies": {
+    "hyphenation.en-us": "^0.2.1",
+    "hypher": "^0.2.4"
+  },
+  "devDependencies": {
+    "assert": "^1.3.0",
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4"
+  }
+}
