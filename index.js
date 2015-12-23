@@ -55,8 +55,8 @@ ColouredProse.prototype.colorize = function (syllable) {
     console.warn('syllable', syllable, ' has more than one vowel. The code assumes that this does not happen.');
   }
 
-  grayscale = numOfVowels/syllable.length;
-  return 'hsv('+ hue +','+ grayscale +'% ,50%)';
+  grayscale = Math.round(numOfVowels/syllable.length * 100);
+  return 'hsl('+ hue +','+ grayscale +'%,50%)';
 }
 
 /**

@@ -71,4 +71,13 @@ describe("ColouredProse", function() {
       assert.ok(result[0][0] === expectedResult[0][0], "Could not get rid of: " + result[0][0].replace('a',''));
     });
   });
+
+  describe(".colorize()", function() {
+    it("should convert a syllable to a certain colour.", function(){
+      var colouredProse = new ColouredProse('a,e,y,u,i,o'.split(','));
+      var color = colouredProse.colorize("yd");
+      console.log(color);
+      assert.equal(color, "hsl(120,50%,50%)", "does not produce the right colour.");
+    });
+  });
 });
